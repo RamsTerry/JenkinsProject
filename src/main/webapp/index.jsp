@@ -1,16 +1,10 @@
-<ui:composition
- xmlns="http://www.w3.org/1999/xhtml"
- xmlns:h="http://xmlns.jcp.org/jsf/html"
- xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
- xmlns:p="http://primefaces.org/ui">
-
-<ui:define name="title">Dashboard</ui:define>
-
-<ui:define name="content">
-<h:form>
-<p:panel header="Dashboard Overview">
-    <h:outputText value="Welcome to Enterprise Dashboard"/>
-</p:panel>
-</h:form>
-</ui:define>
-</ui:composition>
+<html>
+<body>
+<h2>Hello World!</h2>
+<p>A software developer may build a login page, API, or mobile feature.</p>
+<p>A software engineer may design how the authentication system works across millions of users, including security, performance, and infrastructure.</p>
+<h2>All deployed by Terry 2026</h2>
+<h2>Jenkings Tool Learnig</h2>
+<h2>Ramurebiwa</h2>
+</body>
+</html>

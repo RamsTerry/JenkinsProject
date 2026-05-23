@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard Analytics</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         *{
@@ -15,141 +18,264 @@
         }
 
         body{
-            background:#f4f6f9;
+            background:#f4f7fb;
             color:#333;
         }
 
-        .navbar{
-            background:#1e293b;
+        .sidebar{
+            width:240px;
+            height:100vh;
+            background:#111827;
+            position:fixed;
+            left:0;
+            top:0;
+            padding:20px;
+        }
+
+        .sidebar h2{
             color:white;
-            padding:20px 40px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
+            margin-bottom:40px;
+            text-align:center;
         }
 
-        .navbar h1{
-            font-size:24px;
-        }
-
-        .navbar ul{
-            display:flex;
-            list-style:none;
-            gap:20px;
-        }
-
-        .navbar a{
-            color:white;
+        .sidebar a{
+            display:block;
+            color:#cbd5e1;
             text-decoration:none;
+            padding:12px;
+            margin-bottom:10px;
+            border-radius:8px;
             transition:0.3s;
         }
 
-        .navbar a:hover{
+        .sidebar a:hover{
+            background:#1e293b;
             color:#38bdf8;
         }
 
-        .container{
-            padding:40px;
+        .main{
+            margin-left:240px;
+            padding:30px;
+        }
+
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+
+        .topbar h1{
+            font-size:28px;
         }
 
         .cards{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
             gap:20px;
-            margin-top:30px;
+            margin-bottom:30px;
         }
 
         .card{
             background:white;
             padding:25px;
             border-radius:15px;
-            box-shadow:0 4px 12px rgba(0,0,0,0.1);
-            transition:0.3s;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
         }
 
-        .card:hover{
-            transform:translateY(-5px);
-        }
-
-        .card h2{
+        .card h3{
+            color:#64748b;
             margin-bottom:10px;
-            color:#0f172a;
         }
 
         .card p{
-            color:#64748b;
+            font-size:28px;
+            font-weight:bold;
+            color:#0f172a;
         }
 
-        .btn{
-            display:inline-block;
-            margin-top:15px;
-            padding:10px 18px;
-            background:#0ea5e9;
+        .chart-container{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom:30px;
+        }
+
+        .table-container{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        table th{
+            background:#0f172a;
             color:white;
-            text-decoration:none;
-            border-radius:8px;
-            transition:0.3s;
+            padding:14px;
+            text-align:left;
         }
 
-        .btn:hover{
-            background:#0284c7;
+        table td{
+            padding:14px;
+            border-bottom:1px solid #e2e8f0;
         }
 
-        footer{
-            text-align:center;
-            padding:20px;
-            margin-top:40px;
-            background:#1e293b;
+        table tr:hover{
+            background:#f8fafc;
+        }
+
+        .status{
+            padding:6px 12px;
+            border-radius:20px;
             color:white;
+            font-size:12px;
         }
+
+        .active{
+            background:#22c55e;
+        }
+
+        .pending{
+            background:#f59e0b;
+        }
+
+        .inactive{
+            background:#ef4444;
+        }
+
     </style>
 </head>
 
 <body>
 
-<div class="navbar">
-    <h1>My Dashboard</h1>
+<div class="sidebar">
+    <h2>My Dashboard</h2>
 
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Users</a></li>
-        <li><a href="#">Settings</a></li>
-    </ul>
+    <a href="#">Dashboard</a>
+    <a href="#">Analytics</a>
+    <a href="#">Reports</a>
+    <a href="#">Users</a>
+    <a href="#">Settings</a>
 </div>
 
-<div class="container">
+<div class="main">
 
-    <h2>Welcome to Your Dashboard</h2>
-    <p>Manage your application easily with this modern JSP UI.</p>
+    <div class="topbar">
+        <h1>Dashboard Overview</h1>
+        <h3>Welcome Admin</h3>
+    </div>
 
+    <!-- Cards -->
     <div class="cards">
 
         <div class="card">
-            <h2>Total Users</h2>
-            <p>1,245 Active Users</p>
-            <a href="#" class="btn">View</a>
+            <h3>Total Users</h3>
+            <p>1,245</p>
         </div>
 
         <div class="card">
-            <h2>Sales</h2>
-            <p>R45,000 Revenue This Month</p>
-            <a href="#" class="btn">View</a>
+            <h3>Total Revenue</h3>
+            <p>R85,000</p>
         </div>
 
         <div class="card">
-            <h2>Projects</h2>
-            <p>12 Running Projects</p>
-            <a href="#" class="btn">View</a>
+            <h3>Projects</h3>
+            <p>18</p>
         </div>
+
+        <div class="card">
+            <h3>Pending Tasks</h3>
+            <p>32</p>
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+        <h2>Monthly Sales Analytics</h2>
+
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+
+        <h2>Recent Users</h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td>John Smith</td>
+                <td>john@example.com</td>
+                <td>Admin</td>
+                <td><span class="status active">Active</span></td>
+            </tr>
+
+            <tr>
+                <td>Sarah Johnson</td>
+                <td>sarah@example.com</td>
+                <td>User</td>
+                <td><span class="status pending">Pending</span></td>
+            </tr>
+
+            <tr>
+                <td>Michael Brown</td>
+                <td>michael@example.com</td>
+                <td>Manager</td>
+                <td><span class="status inactive">Inactive</span></td>
+            </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
 
 </div>
 
-<footer>
-    © 2026 Dashboard Application
-</footer>
+<script>
+
+    const ctx = document.getElementById('salesChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Revenue',
+                data: [12000, 19000, 15000, 22000, 18000, 25000],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
 
 </body>
 </html>
